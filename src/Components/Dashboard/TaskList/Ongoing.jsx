@@ -2,11 +2,11 @@ import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hook/useAxiosPublic";
 
 const Ongoing = ({ data,refetch }) => {
-  const { titles, priority, descriptions, deadlines } = data;
+  const { titles, priority, descriptions, deadlines,_id } = data;
   const axiosPublic=useAxiosPublic()
 
   const handleMakeComplete=(data)=>{
-    axiosPublic.patch(`/complete/${data?._id}`).then((res)=>{
+    axiosPublic.patch(`/complete/${_id}`).then((res)=>{
         console.log(res.data)
         if(res.data.modifiedCount >0){
             refetch()
@@ -20,6 +20,33 @@ const Ongoing = ({ data,refetch }) => {
         }
     })
   }
+  const handleDelete =(id)=>{
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this task!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result)=>{
+        if (result.isConfirmed) {
+            axiosPublic.delete(`/task/${id}`).then((res) => {
+              // console.log(res.data)
+              if (res.data.deletedCount > 0) {
+                
+                Swal.fire({
+                  title: "Deleted!",
+                  text: `${titles} deleted`,
+                  icon: "success",
+                });
+                refetch()
+              }
+            });
+          }
+      })
+
+  }
 
 
   return (
@@ -32,6 +59,7 @@ const Ongoing = ({ data,refetch }) => {
           <p className="text-sm">Deadline: {deadlines}</p>
           <div className="card-actions justify-end">
             <button onClick={()=>handleMakeComplete(data)} className="btn bg-yellow-600 text-white">Make Completed</button>
+            <button  onClick={() => handleDelete(_id)} className="btn bg-red-700 text-white">Delete Task</button>
           </div>
         </div>
       </div>

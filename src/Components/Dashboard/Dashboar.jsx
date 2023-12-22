@@ -30,11 +30,7 @@ const Dasboard = () => {
                 <FaPen></FaPen> Add Task
               </NavLink>
             </li>
-            <li className="p-4 text-xs md:text-base">
-              <NavLink to="/dashboard/users">
-                <FaUser></FaUser> All Users
-              </NavLink>
-            </li>
+            
             <li className="p-4 text-xs md:text-base">
               <NavLink to="/dashboard/allTAsk">
                 <FaList></FaList> TODO List

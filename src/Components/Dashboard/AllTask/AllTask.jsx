@@ -11,7 +11,6 @@ const AllTask = () => {
 
   const {
     data: task = [],
-    isPending: 
     refetch,
   } = useQuery({
     queryKey: ["task", user?.email],
@@ -35,7 +34,7 @@ const AllTask = () => {
         Your TODO List
       </h2>
 
-      <div className="flex flex-col md:flex-row text-center justify-evenly ">
+      <div className="flex flex-col lg:flex-row text-center justify-evenly ">
         <div>
             <h2 className="text-2xl font-semibold underline mb-2">TODO List</h2>
             <div className="grid justify-center gap-2">

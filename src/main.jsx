@@ -10,15 +10,19 @@ import AuthProvider from "./Components/Provider/AuthProvider";
 import Dasboard from "./Components/Dashboard/Dashboar";
 import Task from "./Components/Dashboard/Task/Task";
 import Profile from "./Components/Dashboard/Profile/Profile";
-import Users from "./Components/Dashboard/Users/Users";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AllTask from "./Components/Dashboard/AllTask/AllTask";
+import ErrorPage from "./Components/Error/ErrorPage";
+import PrivateRoute from "./Components/Private/PrivateRoute";
+import Users from "./Components/Users/Users";
+import About from "./Components/About/About";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -32,11 +36,20 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login></Login>,
       },
+      {
+        path: "/users",
+        element: <Users></Users>,
+      },
+      {
+        path: "/about",
+        element: <About></About>,
+      },
     ],
   },
   {
     path: "dashboard",
-    element: <Dasboard></Dasboard>,
+    element:<PrivateRoute> <Dasboard></Dasboard></PrivateRoute>,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         path: "task",
@@ -46,10 +59,7 @@ const router = createBrowserRouter([
         path: "profile",
         element: <Profile></Profile>,
       },
-      {
-        path: "users",
-        element: <Users></Users>,
-      },
+      
       {
         path: "allTAsk",
         element: <AllTask></AllTask>,

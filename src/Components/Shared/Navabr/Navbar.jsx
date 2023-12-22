@@ -3,7 +3,7 @@ import logo from "../../../assets/todoLogo-removebg-preview.png";
 import useAuth from "../../Hook/useAuth";
 
 const Navbar = () => {
-  const {user,logOut}=useAuth()
+  const { user, logOut } = useAuth();
   const handleLogout = () => {
     logOut().then().catch();
   };
@@ -12,8 +12,11 @@ const Navbar = () => {
       <li className="text-xl font-serif hover:text-red-700">
         <NavLink to="/">Home</NavLink>
       </li>
-      <li className="text-xl font-serif  hover:text-red-700">
-        <NavLink to="/addUser">Add User</NavLink>
+      <li className="text-xl font-serif hover:text-red-700">
+        <NavLink to="/users">All Users</NavLink>
+      </li>
+      <li className="text-xl font-serif hover:text-red-700">
+        <NavLink to="/about">About App</NavLink>
       </li>
     </>
   );
@@ -47,7 +50,7 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="flex justify-center items-center  p-1">
-            <img src={logo} className="w-10 md:w-20 " alt="" />
+            <img src={logo} className="w-20 md:w-36 " alt="" />
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -55,7 +58,7 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           {user ? (
-              <p
+            <p
               onClick={handleLogout}
               className="bg-gradient-to-r from-pink-700 to-blue-700 text-white hover:from-green-700 hover:to-yellow-500 p-3 rounded-lg font-serif text-base lg:text-lg flex justify-center cursor-pointer items-center"
             >
@@ -69,8 +72,6 @@ const Navbar = () => {
               </div>
             </Link>
           )}
-
-          
         </div>
       </div>
     </div>
